@@ -11,6 +11,8 @@ print("Hi", val, "Lets play!")
 
 boardSize=input("Please tell me how big board you want to use: ")
 boardSize=int(boardSize)
+shipNumber=round(boardSize/4+1)
+
 
 print("Here it is your board!")
 
@@ -46,4 +48,24 @@ def get_display_board(size, board):
 
 print(get_display_board(boardSize, board))
 
+
+def placingShips(board):
+    print(f'Hi, you can place {shipNumber} ship!')
+    inputP=input("Please give me a place where you want to place your ship: ").upper()
+    letter=inputP[0]
+    letterIndex=abc.index(letter)
+    exactInput=[int(inputP[1])-1, letterIndex]
+    board[exactInput[0]][exactInput[1]]=markShip
+
+    print(get_display_board(boardSize, board))
+    
+
+    return board
+
+
+for i in range(shipNumber):
+    placingShips(board)
+
+
+print('You are ready! Lets play!')
  
