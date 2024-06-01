@@ -1,3 +1,5 @@
+import random
+
 abc = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
   'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'y', 'Z']
 markShip = 'S'
@@ -16,16 +18,20 @@ shipNumber=round(boardSize/4+1)
 
 print("Here it is your board!")
 
-board=[]
+def makeBoard(boardSize):
+ board=[]
 
-for i in range(boardSize):
+ for i in range(boardSize):
     row=[]
     for j in range(boardSize):
      row.append([emptyMark])
 
     board.append(row)
 
+ return board
 
+
+myBoard=makeBoard(boardSize)
 
 def get_display_board(size, board):
     rows = '  '
@@ -46,7 +52,7 @@ def get_display_board(size, board):
     
     return rows
 
-print(get_display_board(boardSize, board))
+print(get_display_board(boardSize, myBoard))
 
 
 def placingShips(board):
@@ -64,8 +70,36 @@ def placingShips(board):
 
 
 for i in range(shipNumber):
-    placingShips(board)
+    placingShips(myBoard)
 
 
 print('You are ready! Lets play!')
+
+def placingShipsAI(board):
+    input0=random.randrange(0,boardSize)
+    input1=random.randrange(0, boardSize)
+    
+    if board[input0][input1]==emptyMark:
+     board[input0][input1]=markShip
+
+    else:
+     input0N=random.randrange(0,boardSize)
+     input1N=random.randrange(0, boardSize) 
+     board[input0N][input1N]=markShip
+
+
+    print('AI')
+    print(get_display_board(boardSize, AIboard))
+    
+
+    return board
+
  
+
+AIboard=makeBoard(boardSize)
+
+for i in range(shipNumber):
+    placingShipsAI(AIboard)
+
+
+
