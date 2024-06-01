@@ -7,6 +7,12 @@ markHit = 'X'
 markMissed = 'M'
 emptyMark ='0'
 
+myCount=1
+AICount=0
+
+
+
+
 
 val = input("Hi. Nice to meet you. Enter your name: ") 
 print("Hi", val, "Lets play!") 
@@ -94,12 +100,74 @@ def placingShipsAI(board):
 
     return board
 
- 
 
 AIboard=makeBoard(boardSize)
 
 for i in range(shipNumber):
     placingShipsAI(AIboard)
+
+playingBoard=makeBoard(boardSize)
+
+def guessing(myCount):
+    
+    
+    inputH=input("Please give me a place where you want to hit: ").upper()
+    letter=inputH[0]
+    letterIndex=abc.index(letter)
+    exactInput=[int(inputH[1])-1, letterIndex]
+    if AIboard[exactInput[0]][exactInput[1]]==markShip:
+       print ('You found a ship')
+       AIboard[exactInput[0]][exactInput[1]]=markHit
+       playingBoard[exactInput[0]][exactInput[1]]=markHit
+       myCount=myCount+1
+  
+
+
+    else:
+       print ('You  missed!')
+       AIboard[exactInput[0]][exactInput[1]]=markMissed
+       playingBoard[exactInput[0]][exactInput[1]]=markMissed
+
+
+    print(get_display_board(boardSize, playingBoard))
+    
+
+    return myCount
+
+def guessingAI():
+
+    input0=random.randrange(0,boardSize)
+    input1=random.randrange(0, boardSize)
+    
+    if AIboard[input0][input1]==markShip:
+     myBoard[input0][input1]=markHit
+
+    else: 
+     myBoard[input0][input1]=markMissed
+
+
+    print('Myboard')
+    print(get_display_board(boardSize, myBoard))
+
+    
+    return myBoard
+    
+
+
+
+myCountNew=guessing(myCount)
+
+while myCountNew<=shipNumber or AICount<=shipNumber:
+   guessing(myCount)
+   guessingAI()
+   print(myCountNew)
+   if myCountNew==2:
+      break
+  
+   
+   
+
+print('the game is over')
 
 
 
